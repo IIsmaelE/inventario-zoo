@@ -13,25 +13,28 @@ mongoose.connect(process.env.MONGO_URI)
 .catch(err => console.error(" Error de conexión:", err));
 
 // Esquema NoSQL de Mongoose (Documento JSON)
-const ProductoSchema = new mongoose.Schema({
-nombre: String,
-precio: Number,
-existencia: Number
+const AnimalSchema = new mongoose.Schema({
+ nombre: String,
+ especie: String,
+ edad: Number
 });
-const Producto = mongoose.model('Producto', ProductoSchema);
+const Animal = mongoose.model('Animal', AnimalSchema);
 
 // RUTAS DE LA API
 // 1. GET: Obtener todos los productos
-app.get('/productos', async (req, res) => {
-const productos = await Producto.find();
-res.json(productos);
+app.get('/animales', async (req, res) => {
+ const animales = await Animal.find();
+ res.json(animales);
 });
 
 // 2. POST: Insertar un nuevo producto
-app.post('/productos', async (req, res) => {
-const nuevoProducto = new Producto(req.body);
-await nuevoProducto.save();
-res.json({ mensaje: "Producto registrado", nuevoProducto });
+app.post('/animales', async (req, res) => {
+ const nuevoAnimal = new Animal(req.body);
+ await nuevoAnimal.save();
+ res.json({
+   mensaje: "Animal registrado",
+   nuevoAnimal
+ });
 });
 
 const PORT = process.env.PORT || 3000;
