@@ -37,5 +37,33 @@ app.post('/animales', async (req, res) => {
  });
 });
 
+
+// EDITAR
+app.put('/animales/:id', async (req, res) => {
+
+    const animalesActualizado =
+    await Animal.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        { new:true }
+    );
+
+    res.json(animalActualizado);
+
+});
+
+// ELIMINAR
+app.delete('/animales/:id', async (req, res) => {
+
+    await Animal.findByIdAndDelete(
+        req.params.id
+    );
+
+    res.json({
+        mensaje:"Animal eliminado"
+    });
+
+});
+
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Servidor activo en puerto ${PORT}`));
