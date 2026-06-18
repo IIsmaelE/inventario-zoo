@@ -48,7 +48,7 @@ app.put('/animales/:id', async (req, res) => {
         { new:true }
     );
 
-    res.json(animalActualizado);
+    res.json(animalesActualizado);
 
 });
 
